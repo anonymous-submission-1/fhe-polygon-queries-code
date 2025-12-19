@@ -1,0 +1,28 @@
+#include <iostream>
+#include <NTL/RR.h>
+#include <cmath>
+#include "optimized_degrees.h"
+
+using namespace std;
+using namespace NTL;
+
+int main() {
+
+	// user setting parameters
+	long alpha = 8;		// precision parameter alpha
+	long max_factor = 1;	// max_factor = 1 for comparison operation. max_factor > 1 for max/ReLU operation
+	long maxdeg = 63;		// 31 or 63
+	bool is_comp = true;	// true: comparison operation, false: max/ReLU operation
+	long level = 22;		// total level consumption D. just for compute_min_multdepth_update
+
+	// by default
+	RR epsilon = max_factor*pow(RR(2),RR(-alpha));
+
+	// ComputeMinMultDegs or ComputeMinTimeDegs
+	compute_min_multdepth(RR(alpha), epsilon, maxdeg, is_comp);
+	//compute_min_multdepth_update(RR(alpha), epsilon, level, maxdeg, is_comp);
+
+
+
+	return 0;
+}
